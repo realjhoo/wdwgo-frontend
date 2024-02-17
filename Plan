@@ -1,0 +1,73 @@
+A form page for each type of schedule; regular, advisory, activity, halfday
+
+Each form has entries for all of the periods of the day; 8-820, 820 - 1st per, 2nd, 3rd, 4th, 5th, 6th, 7th, activity, , EoD PD, lunch, passing periods, end of 7th to 420.
+
+Form also needs school year, e.g., 2023-2024
+
+A selector for 6th, 7th and 8th grade. Radio buttons?
+
+At the bottom, a next button. On the last page a submit.
+
+The app converts the time for each period to minutes (of the day where midnight is 0 and 8:20 = 500)
+
+All data is validated on blur with visual indication of a problem (shaking turning red) (must include :? 24hr format?)
+
+Passing period fills itself based on the end time of the period. (do on blur)
+
+On SUBMIT the app writes a file, 'constant.js' with the required values. Managed as a template literal. File named (or located ina directory) based on grade level.
+
+'schedule.js' is changed to read these constants, instead of being hard coded for times. e.g., ${RegFirstPassingEnd} or ${AdvFifthStart} where the first three letters are the type of schedule, reg, adv, act, or hlf, followed by the period First, Second, etc, or FirstPass, ThirdPass, and then either Start or End
+
+Typescript... just to increase the difficulty
+
+Possibly compile... what issues are there for this being run locally given that it has to access the hard drive? Electron? (This may not be possible).
+The main issue here is that this would greatly slow down production, since even simple things would have to be relearned. If straight JS can save to the hard drive, an Electron app will not be needed.
+
+
+DEADLINE
+--------
+This would need to be complete 100% by the end of July 2024 (5 months from today)
+
+
+TASKS
+-----
+Converter function of time to minutes of the day ✓
+
+Validation function ✓
+
+Validation animation ✓
+
+Create template literal ✓
+
+Load template or include in code? (using simpler constants.js, this can just be included in code as template literal) ✓
+
+Writing variables to template literal ✓
+
+Writing template to disk ✓
+
+Multipage form ✓
+
+In 'schedule.js' replace values with template variables.
+
+
+LINKS
+-----
+The multi page form
+https://www.w3schools.com/howto/howto_js_form_steps.asp
+
+Traversy
+https://www.youtube.com/watch?v=ML743nrkMHw&t
+
+Electron
+https://www.electronjs.org
+
+SHAKE
+https://stackoverflow.com/questions/30652207/shake-text-input-if-empty
+
+WRITE FILE
+Use filesaver (no need for electron)
+https://muhimasri.com/blogs/how-to-save-files-in-javascript/
+
+VALIDATE TIME
+https://stackoverflow.com/questions/5563028/how-to-validate-with-javascript-an-input-text-with-hours-and-minutes
+
