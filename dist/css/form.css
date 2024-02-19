@@ -1,4 +1,4 @@
-/* Style the form */
+/* form */
 #regForm {
   width: 100%;
   max-width: 450px;
@@ -14,7 +14,7 @@ h1 {
   margin-left: 10px;
 }
 
-/* Style the input fields */
+/* input fields */
 input {
   margin: 10px;
   padding: 10px;
@@ -25,7 +25,6 @@ input {
   height: 48px;
 }
 
-/* Mark input boxes that gets an error on validation: */
 input.invalid {
   background-color: #ffdddd;
 }
@@ -36,35 +35,25 @@ input.invalid {
   animation-iteration-count: 3;
 }
 
-/* Hide all steps by default: */
+/* Hide tabs by default: */
 .tab {
   display: none;
 }
 
 .button-container {
   width: 100%;
-  /* margin-left: 50% - width; */
-  /* text-align: right; */
   display: flex;
   justify-content: center;
 }
 
 button {
-  /* position: absolute;
-  top: 50%;
-  /* right: -50%; */
-  /* margin: 0; */
-  /* margin-left: 0px; */
   background-color: var(--app-text-color);
   color: #fff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 24px;
-  /* font-family: Raleway; */
   cursor: pointer;
-  /* z-index: -1; */
-  /* right:0; */
 }
 
 button:hover {
@@ -80,29 +69,27 @@ button:hover {
   margin-top: 40px;
 }
 
-/* Make circles that indicate the steps of the form: */
+/* Make indicator circles */
 .step {
   height: 20px;
   width: 20px;
   margin: 0 2px;
   background-color: #bbb;
-  /* border: none; */
   border-style: solid;
   border-radius: 50%;
   display: inline-block;
   opacity: 0.5;
 }
 
-/* Mark the active step: */
 .step.active {
   opacity: 1;
 }
 
-/* Mark the steps that are finished and valid: */
 .step.finish {
   background-color: var(--app-text-color);
 }
 
+/* Make it 2 columns */
 .right {
   float: right;
   margin-top: -58px;

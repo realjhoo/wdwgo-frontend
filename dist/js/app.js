@@ -1,14 +1,7 @@
-import { generateTemplate7th, } from "./constants-template.js";
-import { grade7code } from "./html.js";
-// import {
-//   generateTemplate6th,
-//   generateTemplate7th,
-//   generateTemplate8th,
-// } from "./constants-template";
+import { generateTemplate6th, generateTemplate7th, generateTemplate8th, } from "./constants-template.js";
+import { grade6code, grade7code, grade8code } from "./html.js";
 const schoolYear = "2023-2024";
-//******************************************************************* */
-let currentTab = 0; // Current tab is set to be the first tab (0)
-// let dataValid: boolean = false;
+let currentTab = 0; // set current tab to 0
 // --------------------------------------------------------
 function showTab(num) {
     // This function will display the specified tab of the form ...
@@ -37,19 +30,14 @@ function nextPrev(num) {
     // Exit the function if any field in the current tab is invalid:
     if (num === 1 && !validateForm())
         return false;
-    // getInputValue();
-    // Hide the current tab:
+    // Hide the current tab
     tab[currentTab].style.display = "none";
     // Increase or decrease the current tab by 1:
     currentTab += num;
-    // if you have reached the end of the form... :
+    // if you reach the end of the form
     if (currentTab >= tab.length) {
-        //...the form gets submitted:
-        // call func to write data * * * * * * * * *  *
-        // get values out of inputs
         getInputValue();
-        // (<HTMLFormElement>document.getElementById("regForm")).submit();
-        // DO SOMETHING TO WRITE DATA * * * * **  * * * * * * * *
+        document.getElementById("regForm").submit();
         return false;
     }
     // Otherwise, display the correct tab:
@@ -57,8 +45,6 @@ function nextPrev(num) {
 }
 // --------------------------------------------------------
 function validateForm() {
-    // This function checks that fields are not empty on "Next"
-    // THIS FUNC MUST VALIDATE THE FORMAT BEFORE MOVING ON * * * * * *
     let valid = true;
     let tab = document.getElementsByClassName("tab");
     let inputElem = tab[currentTab].getElementsByTagName("input");
@@ -91,25 +77,22 @@ function validateForm() {
         document
             .getElementsByClassName("step")[currentTab].classList.remove("finish");
     }
-    return valid; // return the valid status
+    return valid;
 }
 // --------------------------------------------------------
 function validateInput(event) {
-    // Check each input is formated correctly when user leaves input field
-    // indicate if invalid
-    // return true | false
-    // this const is calledd a type cast
+    // this const is called a type cast
     const target = event.target;
     let tab = document.getElementsByClassName("tab");
     let inputElem = tab[currentTab].getElementsByTagName("input");
     for (let i = 0; i < inputElem.length; i++) {
         // test that entry is formated hh:mm
         let isValid = /^([0-1]?[0-9]|2[0-4]).([0-5][0-9])(:[0-5][0-9])?$/.test(target.value);
+        console.log(isValid);
         if (isValid) {
             // input entered is formatted properly
             target.classList.remove("invalid");
             target.classList.remove("error-shake");
-            // dataValid = true;
             return true;
         }
         else {
@@ -119,28 +102,26 @@ function validateInput(event) {
             setTimeout(() => {
                 target.classList.remove("error-shake");
             }, 300);
-            // dataValid = false;
             return false;
         }
     }
 }
 // --------------------------------------------------------
 function setStepIndicator(num) {
-    // This function removes the "active" class of all steps...
+    // remove the "active" class of all indicators
     let step = document.getElementsByClassName("step");
     for (let i = 0; i < step.length; i++) {
         step[i].classList.remove("active");
     }
-    //... and adds the "active" class to the current step:
+    // add the "active" class to current indicator
     step[num].classList.add("active");
 }
-//******************************************************************* */
 // --------------------------------------------------------
 function getInputValue() {
     let input = document.getElementsByTagName("input");
     let inputValue = [];
     let minutes = [];
-    // loop thru the inputs, skipping the 3 grade slider ones
+    // loop thru the inputs, skipping the slider ones
     for (let i = 0; i < input.length - 3; i++) {
         inputValue[i] = input[i + 3].value;
         minutes[i] = convertTime(inputValue[i]);
@@ -170,12 +151,12 @@ function getGradeLevel() {
 }
 // --------------------------------------------------------
 function convertTime(time) {
-    //add leading zero if needed
+    // pad time with leading zero
     let padTime = time.padStart(5, "0");
     // extract minutes
     let len = padTime.length;
     let min = padTime.substring(len - 2, len);
-    // extract hours
+    // extract hour
     let hr = padTime.substring(0, 2);
     //convert hours to minutes
     let hours = parseInt(hr) * 60;
@@ -190,13 +171,13 @@ function generateTemplate(timeInMinutes, gradeLevel) {
     let checked8 = document.getElementById("switch-eighth");
     let constants = "";
     if (checked6.checked) {
-        //  constants = generateTemplate6th(timeInMinutes, gradeLevel, schoolYear);
+        constants = generateTemplate6th(timeInMinutes, gradeLevel, schoolYear);
     }
     else if (checked7.checked) {
         constants = generateTemplate7th(timeInMinutes, gradeLevel, schoolYear);
     }
     else if (checked8.checked) {
-        //   constants = generateTemplate8th(timeInMinutes, gradeLevel, schoolYear);
+        constants = generateTemplate8th(timeInMinutes, gradeLevel, schoolYear);
     }
     else {
         alert("ERROR");
@@ -242,24 +223,45 @@ function activateSubmitButton() {
     });
 }
 // --------------------------------------------------------
+function activateSliderListener() {
+    const slider = document.getElementsByClassName("switch");
+    for (let i = 0; i < slider.length; i++) {
+        slider[i].addEventListener("change", (event) => {
+            const checked6 = document.getElementById("switch-sixth");
+            const checked7 = document.getElementById("switch-seventh");
+            const checked8 = document.getElementById("switch-eighth");
+            let gradeLevel;
+            console.log(grade6code);
+            if (checked6.checked) {
+                document.getElementById("insertHTML").innerHTML = grade6code;
+                showTab(0);
+            }
+            else if (checked7.checked) {
+                document.getElementById("insertHTML").innerHTML = grade7code;
+                showTab(0);
+            }
+            else if (checked8.checked) {
+                document.getElementById("insertHTML").innerHTML = grade8code;
+                showTab(0);
+            }
+            else {
+                gradeLevel = "???";
+            }
+            return gradeLevel;
+        });
+    }
+}
+// --------------------------------------------------------
 function activateInputListener() {
     let inputElem = document.getElementsByTagName("input");
     for (let i = 0; i < inputElem.length; i++) {
-        inputElem[i].addEventListener("blur", (evnt) => {
-            validateInput(evnt);
+        inputElem[i].addEventListener("blur", (event) => {
+            validateInput(event);
         });
     }
 }
 // --------------------------------------------------------
 function main() {
-    activateButtonListeners();
-    activateSubmitButton();
-    activateInputListener();
-    // needs event listener on only the top 3 inputs
-    // on chenge, they should be checked
-    // then run inserCode function
-    // the code belo should live there
-    // goodnighty
     let html = getGradeLevel();
     if (html === "6th") {
         document.getElementById("insertHTML").innerHTML = html;
@@ -270,8 +272,24 @@ function main() {
     else if (html === "8th") {
         document.getElementById("insertHTML").innerHTML = html;
     }
+    activateButtonListeners();
+    activateSubmitButton();
+    activateInputListener();
+    activateSliderListener();
     showTab(currentTab); // Display the current tab
 }
 // --------------------------------------------------------
 main();
+// TODO
+/*
+Half Day order of classes for 6-7-8
+add grade selector to wdwgo
+hlfPDStart and End are undefined
+
+FYI * * * * *
+constants-template.ts is where the OUTPUT comes from
+constantsX.js is OUTPUT
+schedule.ts is generalized
+html.ts is the layout of the page
+*/
 //# sourceMappingURL=app.js.map
