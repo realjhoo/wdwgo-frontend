@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script type="module" src="js/app.js" defer></script>
+    <script type="module" src="js/constants-template.js" defer></script>
+
+    <title>wdwgo Frontend</title>
+  </head>
+
+  <body>
+    <h1 id="app-title">wdwgo Frontend</h1>
+    <!-- * * *  grade level selector switches * * * -->
+    <div class="switch-container">
+      <!-- <div class="switches"> -->
+      <input type="radio" name="radio" id="switch-sixth" class="switch" />
+      <label for="switch-sixth">6th Grade</label>
+
+      <input
+        type="radio"
+        name="radio"
+        id="switch-seventh"
+        class="switch"
+        checked
+      />
+      <label for="switch-seventh">7th Grade</label>
+
+      <input type="radio" name="radio" id="switch-eighth" class="switch" />
+      <label for="switch-eighth">8th Grade</label>
+      <!-- </div> -->
+    </div>
+
+    <!-- * * * Form * * *  -->
+    <form id="regForm" action="">
+      <h1>Bell Schedule:</h1>
+      <div id="insertHTML"></div>
+      <!-- 
+      <div class="tab" id="tab1">
+        <span class="sched-name"> Regular: </span>
+
+        <p>
+          <input placeholder="First Period Start" />
+        </p>
+        <input placeholder="First Period End" class="right" />
+        <p></p>
+
+        <p>
+          <input placeholder="Second Period Start" />
+        </p>
+        <p>
+          <input placeholder="Second Period End" class="right" />
+        </p>
+
+        <p>
+          <input
+            placeholder="Third Period Start"
+            oninput="this.className = ''"
+          />
+        </p>
+        <p>
+          <input placeholder="Third Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Lunch Start" />
+        </p>
+        <p>
+          <input placeholder="Lunch End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Fourth Period Start" />
+        </p>
+
+        <p>
+          <input placeholder="Fourth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Fifth Period Start" />
+        </p>
+        <p>
+          <input placeholder="Fifth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Sixth Period Start" />
+        </p>
+        <p>
+          <input placeholder="Sixth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Seventh Period Start" />
+        </p>
+        <p>
+          <input placeholder="Seventh Period End" class="right" />
+        </p>
+      </div>
+
+      <div class="tab tab2">
+        <span class="sched-name"> Advisory: </span>
+
+        <p>
+          <input placeholder="First Period Start" />
+        </p>
+        <input placeholder="First Period End" class="right" />
+        <p></p>
+
+        <p>
+          <input placeholder="Second Period Start" />
+        </p>
+        <p>
+          <input placeholder="Second Period End" class="right" />
+        </p>
+
+        <p>
+          <input
+            placeholder="Third Period Start"
+            oninput="this.className = ''"
+          />
+        </p>
+        <p>
+          <input placeholder="Third Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Lunch Start" />
+        </p>
+        <p>
+          <input placeholder="Lunch End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Fourth Period Start" />
+        </p>
+
+        <p>
+          <input placeholder="Fourth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Fifth Period Start" />
+        </p>
+        <p>
+          <input placeholder="Fifth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Sixth Period Start" />
+        </p>
+        <p>
+          <input placeholder="Sixth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Seventh Period Start" />
+        </p>
+        <p>
+          <input placeholder="Seventh Period End" class="right" />
+        </p>
+      </div>
+
+      <div class="tab tab3">
+        <span class="sched-name"> Activity: </span>
+
+        <p>
+          <input placeholder="First Period Start" />
+        </p>
+        <input placeholder="First Period End" class="right" />
+        <p></p>
+
+        <p>
+          <input placeholder="Second Period Start" />
+        </p>
+        <p>
+          <input placeholder="Second Period End" class="right" />
+        </p>
+
+        <p>
+          <input
+            placeholder="Third Period Start"
+            oninput="this.className = ''"
+          />
+        </p>
+        <p>
+          <input placeholder="Third Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Lunch Start" />
+        </p>
+        <p>
+          <input placeholder="Lunch End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Fourth Period Start" />
+        </p>
+
+        <p>
+          <input placeholder="Fourth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Fifth Period Start" />
+        </p>
+        <p>
+          <input placeholder="Fifth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Sixth Period Start" />
+        </p>
+        <p>
+          <input placeholder="Sixth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Seventh Period Start" />
+        </p>
+        <p>
+          <input placeholder="Seventh Period End" class="right" />
+        </p>
+      </div>
+
+      <div class="tab tab4">
+        <span class="sched-name"> Half Day: </span>
+
+        <p>
+          <input placeholder="First Period Start" />
+        </p>
+        <input placeholder="First Period End" class="right" />
+        <p></p>
+
+        <p>
+          <input placeholder="Second Period Start" />
+        </p>
+        <p>
+          <input placeholder="Second Period End" class="right" />
+        </p>
+
+        <p>
+          <input
+            placeholder="Third Period Start"
+            oninput="this.className = ''"
+          />
+        </p>
+        <p>
+          <input placeholder="Third Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Lunch Start" />
+        </p>
+        <p>
+          <input placeholder="Lunch End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Fourth Period Start" />
+        </p>
+
+        <p>
+          <input placeholder="Fourth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Fifth Period Start" />
+        </p>
+        <p>
+          <input placeholder="Fifth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Sixth Period Start" />
+        </p>
+        <p>
+          <input placeholder="Sixth Period End" class="right" />
+        </p>
+
+        <p>
+          <input placeholder="Seventh Period Start" />
+        </p>
+        <p>
+          <input placeholder="Seventh Period End" class="right" />
+        </p>
+      </div> -->
+
+      <!-- Buttons -->
+      <div class="button-container">
+        <button type="button" id="prevBtn">Previous</button>
+        <button type="button" id="nextBtn">Next</button>
+      </div>
+
+      <!-- Circles which indicates the steps of the form: -->
+      <div class="indicator">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+      </div>
+    </form>
+  </body>
+</html>

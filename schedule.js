@@ -1,31 +1,48 @@
 // @ts-nocheck
 
-/*
- Replace each number with a literal ${RegFirstPassingEnd} 
- or ${AdvFithStart}
- wrap the whole thing with ``
+/* *****************************************************************
+Replace each number of minutes with a const where:
+the first three letters indicate type of schedule;
+     reg, adv, act, hlf
+followed by the period;
+     First, Third, Seventh, etc
+Lastly, either Start or End
 
- This is in JS not TS, so it would need to go to the dest folder
- But also the src folder to prevent compiling overwrite issues
- or requiring a recompile.
+Times that will not be adjustable by the frontend are prefixed "all"
 
- Consider: 
- Replacing numbers with variables, then write a file out with just constants
- This would be simpler and perhaps easier to maintain?
+Examples:
+The beginning of second period on an advisory day would be:
+     advSecondStart
+The end of the Passing period after Third period on an activity day would be:
+     actThirdPassEnd
+The beginning of the day when contract hours start
+     allStartDay
+
+These constants will be stored in constants6.js, constants7.js or constants8.js
  */
 
+/* *******************************************************************
+NOTE:
+Any divisions or indications that are before the start of 1st period
+will need to be automatically included in constantsX.js, since these will
+not have entries on the front end form
+
+The same is true for anything after 4.10, EoC 7th period
+these will preface with "all"
+
+*/
+
+//TODO add include constants.js to this file
+
+// ALL VARIABLES FOR REG SCHED DONE
+// NEED TO ADD Constant. to each
 "7th";
 "use strict";
+import * as Constants from "./constants.js";
+//  usage --> Constants.regFirstStart
+
 const schoolYear = "2023 - 2024";
-/*
-8am = 480
-8:20 = 500 (indicates the time in minutes)
-8:55 = 535
-*/
-// testing value follows
-const allOutsideOfHours = 999;
-const allEightAM = 480; // <-- this would be in constant.js
-const allStartDay = 500;
+
 // --------------------------------------------------------
 export function getRegularDay(minutesNow) {
   let classEnds;
@@ -35,74 +52,73 @@ export function getRegularDay(minutesNow) {
   document.querySelector(".school-year").innerHTML = schoolYear;
 
   if (minutesNow < allEightAM) {
-    // before 8am
     period.innerHTML = "Look at you, here so early!";
     return (classEnds = allOutsideOfHours);
   } else if (minutesNow >= allEightAM && minutesNow < allStartDay) {
     period.innerHTML = "Working for free until 8:20...";
-    return (classEnds = allStartDay); //8:20
-  } else if (minutesNow >= allStartDay && minutesNow < 535) {
+    return (classEnds = allStartDay);
+  } else if (minutesNow >= allStartDay && minutesNow < regFirstStart) {
     period.innerHTML = "1st Period starts in...";
-    return (classEnds = 535); // 8.20 - 8:55
-  } else if (minutesNow >= 535 && minutesNow < 590) {
-    period.innerHTML = "1st Period"; //8:55
+    return (classEnds = regFirstStart);
+  } else if (minutesNow >= regFirstStart && minutesNow < regFirstEnd) {
+    period.innerHTML = "1st Period";
     upNext.innerHTML = "Next: 2nd Period";
-    return (classEnds = 590);
-  } else if (minutesNow >= 590 && minutesNow < 595) {
+    return (classEnds = regFirstEnd);
+  } else if (minutesNow >= regFirstEnd && minutesNow < regSecondStart) {
     period.innerHTML = "Passing Period";
-    return (classEnds = 595);
-  } else if (minutesNow >= 595 && minutesNow < 645) {
+    return (classEnds = regSecondStart);
+  } else if (minutesNow >= regSecondStart && minutesNow < regSecondEnd) {
     period.innerHTML = "2nd Period";
     upNext.innerHTML = "Next: 3rd Period";
-    return (classEnds = 645);
-  } else if (minutesNow >= 645 && minutesNow < 650) {
+    return (classEnds = regSecondEnd);
+  } else if (minutesNow >= regSecondEnd && minutesNow < regThirdStart) {
     period.innerHTML = "Passing Period";
-    return (classEnds = 650);
-  } else if (minutesNow >= 650 && minutesNow < 705) {
+    return (classEnds = regThirdStart);
+  } else if (minutesNow >= regThirdStart && minutesNow < regThirdEnd) {
     period.innerHTML = "3rd Period";
     upNext.innerHTML = "Next: Lunch";
-    return (classEnds = 705);
-  } else if (minutesNow >= 705 && minutesNow < 710) {
+    return (classEnds = regThirdEnd);
+  } else if (minutesNow >= regThirdEnd && minutesNow < regLunchStart) {
     period.innerHTML = "Passing Period";
-    return (classEnds = 710);
-  } else if (minutesNow >= 710 && minutesNow < 745) {
+    return (classEnds = regLunchStart);
+  } else if (minutesNow >= regLunchStart && minutesNow < regLunchEnd) {
     period.innerHTML = "B Lunch";
     upNext.innerHTML = "Next: 4th Period";
-    return (classEnds = 745);
-  } else if (minutesNow >= 745 && minutesNow < 750) {
+    return (classEnds = regLunchEnd);
+  } else if (minutesNow >= regLunchEnd && minutesNow < regFourthStart) {
     period.innerHTML = "Passing Period";
-    return (classEnds = 750);
-  } else if (minutesNow >= 750 && minutesNow < 805) {
+    return (classEnds = regFourthStart);
+  } else if (minutesNow >= regFourthStart && minutesNow < regFourthEnd) {
     period.innerHTML = "4th Period";
     upNext.innerHTML = "Next: 5th Period";
-    return (classEnds = 805);
-  } else if (minutesNow >= 805 && minutesNow < 810) {
+    return (classEnds = regFourthEnd);
+  } else if (minutesNow >= regFourthEnd && minutesNow < regFifthStart) {
     period.innerHTML = "Passing Period";
-    return (classEnds = 810);
-  } else if (minutesNow >= 810 && minutesNow < 860) {
+    return (classEnds = regFifthStart);
+  } else if (minutesNow >= regFifthStart && minutesNow < regFifthEnd) {
     period.innerHTML = "5th Period";
     upNext.innerHTML = "Next: 6th Period";
-    return (classEnds = 860);
-  } else if (minutesNow >= 860 && minutesNow < 865) {
+    return (classEnds = regFifthEnd);
+  } else if (minutesNow >= regFifthEnd && minutesNow < regSixthStart) {
     period.innerHTML = "Passing Period";
-    return (classEnds = 865);
-  } else if (minutesNow >= 865 && minutesNow < 915) {
+    return (classEnds = regSixthStart);
+  } else if (minutesNow >= regSixthStart && minutesNow < regSixthEnd) {
     period.innerHTML = "6th Period";
     upNext.innerHTML = "Next: 7th Period";
-    return (classEnds = 915);
-  } else if (minutesNow >= 915 && minutesNow < 920) {
+    return (classEnds = regSixthEnd);
+  } else if (minutesNow >= regSixthEnd && minutesNow < regSeventhStart) {
     period.innerHTML = "Passing Period";
-    return (classEnds = 920);
-  } else if (minutesNow >= 920 && minutesNow < 970) {
+    return (classEnds = regSeventhStart);
+  } else if (minutesNow >= regSeventhStart && minutesNow < regSeventhEnd) {
     period.innerHTML = "7th Period";
     upNext.innerHTML = "";
-    return (classEnds = 970);
-  } else if (minutesNow >= 970 && minutesNow < 980) {
+    return (classEnds = regSeventhStart);
+  } else if (minutesNow >= regSeventhStart && minutesNow < allEndDay) {
     period.innerHTML = "You can leave in...";
-    return (classEnds = 980);
+    return (classEnds = allEndDay);
   } else {
     period.innerHTML = "No one is paying you to be here!";
-    return (classEnds = 999);
+    return (classEnds = allOutsideOfHours);
   }
 }
 // --------------------------------------------------------
@@ -113,14 +129,14 @@ export function getAdvisoryDay(minutesNow) {
   document.querySelector(".schedule").innerHTML = "Advisory Schedule";
   document.querySelector(".school-year").innerHTML = schoolYear;
 
-  if (minutesNow < 480) {
+  if (minutesNow < allEightAM) {
     // before 8am
     period.innerHTML = "Look at you, here so early!";
-    return (classEnds = 999);
-  } else if (minutesNow >= 480 && minutesNow < 500) {
+    return (classEnds = allOutsideOfHours);
+  } else if (minutesNow >= allEightAM && minutesNow < allStartDay) {
     period.innerHTML = "Working for free until 8:20...";
-    return (classEnds = 500); //8:20
-  } else if (minutesNow >= 500 && minutesNow < 535) {
+    return (classEnds = allStartDay); //8:20
+  } else if (minutesNow >= allStartDay && minutesNow < 535) {
     period.innerHTML = "1st Period starts in...";
     return (classEnds = 535); // 8.20 - 8:55
   } else if (minutesNow >= 535 && minutesNow < 585) {
@@ -183,12 +199,12 @@ export function getAdvisoryDay(minutesNow) {
     period.innerHTML = "7th Period";
     upNext.innerHTML = "";
     return (classEnds = 970);
-  } else if (minutesNow >= 970 && minutesNow < 980) {
+  } else if (minutesNow >= 970 && minutesNow < allEndDay) {
     period.innerHTML = "You can leave in...";
-    return (classEnds = 980);
+    return (classEnds = allEndDay);
   } else {
     period.innerHTML = "Go home!";
-    return (classEnds = 999);
+    return (classEnds = allOutsideOfHours);
   }
 }
 // --------------------------------------------------------
@@ -200,14 +216,14 @@ export function getActivityDay(minutesNow) {
   document.querySelector(".schedule").innerHTML = "Activity Schedule";
   document.querySelector(".school-year").innerHTML = schoolYear;
 
-  if (minutesNow < 480) {
+  if (minutesNow < allEightAM) {
     // before 8am
     period.innerHTML = "Look at you, here so early!";
-    return (classEnds = 999);
-  } else if (minutesNow >= 480 && minutesNow < 500) {
+    return (classEnds = allOutsideOfHours);
+  } else if (minutesNow >= allEightAM && minutesNow < allStartDay) {
     period.innerHTML = "Working for free until 8:20...";
-    return (classEnds = 500); //8:20
-  } else if (minutesNow >= 500 && minutesNow < 535) {
+    return (classEnds = allStartDay); //8:20
+  } else if (minutesNow >= allStartDay && minutesNow < 535) {
     period.innerHTML = "1st Period starts in...";
     return (classEnds = 535); // 8.20 - 8:55
   } else if (minutesNow >= 535 && minutesNow < 585) {
@@ -270,12 +286,12 @@ export function getActivityDay(minutesNow) {
     period.innerHTML = "Activity";
     upNext.innerHTML = "";
     return (classEnds = 970);
-  } else if (minutesNow >= 970 && minutesNow < 980) {
+  } else if (minutesNow >= 970 && minutesNow < allEndDay) {
     period.innerHTML = "You can leave in...";
-    return (classEnds = 980);
+    return (classEnds = allEndDay);
   } else {
     period.innerHTML = "Why are you still at work?";
-    return (classEnds = 999);
+    return (classEnds = allOutsideOfHours);
   }
 }
 // --------------------------------------------------------
@@ -285,14 +301,14 @@ export function getHalfDay(minutesNow) {
   const upNext = document.querySelector(".up-next");
   document.querySelector(".schedule").innerHTML = "Half Day Schedule";
   document.querySelector(".school-year").innerHTML = schoolYear;
-  if (minutesNow < 480) {
+  if (minutesNow < allEightAM) {
     // before 8am
     period.innerHTML = "Look at you, here so early!";
-    return (classEnds = 999);
-  } else if (minutesNow >= 480 && minutesNow < 500) {
+    return (classEnds = allOutsideOfHours);
+  } else if (minutesNow >= allEightAM && minutesNow < allStartDay) {
     period.innerHTML = "Working for free until 8:20...";
-    return (classEnds = 500); //8:20
-  } else if (minutesNow >= 500 && minutesNow < 535) {
+    return (classEnds = allStartDay); //8:20
+  } else if (minutesNow >= allStartDay && minutesNow < 535) {
     period.innerHTML = "1st Period starts in...";
     return (classEnds = 535); // 8.20 - 8:55
   } else if (minutesNow >= 535 && minutesNow < 565) {
@@ -352,12 +368,12 @@ export function getHalfDay(minutesNow) {
     period.innerHTML = "PD";
     upNext.innerHTML = "";
     return (classEnds = 970);
-  } else if (minutesNow >= 970 && minutesNow < 980) {
+  } else if (minutesNow >= 970 && minutesNow < allEndDay) {
     period.innerHTML = "You can leave in...";
-    return (classEnds = 980);
+    return (classEnds = allEndDay);
   } else {
     period.innerHTML = "I appreciate you";
-    return (classEnds = 999);
+    return (classEnds = allOutsideOfHours);
   }
 }
 //# sourceMappingURL=schedule.js.map

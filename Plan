@@ -12,8 +12,6 @@ The app converts the time for each period to minutes (of the day where midnight 
 
 All data is validated on blur with visual indication of a problem (shaking turning red) (must include :? 24hr format?)
 
-Passing period fills itself based on the end time of the period. (do on blur)
-
 On SUBMIT the app writes a file, 'constant.js' with the required values. Managed as a template literal. File named (or located ina directory) based on grade level.
 
 'schedule.js' is changed to read these constants, instead of being hard coded for times. e.g., ${RegFirstPassingEnd} or ${AdvFifthStart} where the first three letters are the type of schedule, reg, adv, act, or hlf, followed by the period First, Second, etc, or FirstPass, ThirdPass, and then either Start or End
@@ -70,4 +68,7 @@ https://muhimasri.com/blogs/how-to-save-files-in-javascript/
 
 VALIDATE TIME
 https://stackoverflow.com/questions/5563028/how-to-validate-with-javascript-an-input-text-with-hours-and-minutes
+
+THREE WAY SWITCHES
+https://dev.to/navdeepm20/3-state-switches-are-not-tough-ultimate-guide-to-css-switches-using-css-only-1gja
 
